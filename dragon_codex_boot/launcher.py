@@ -425,7 +425,28 @@ class LauncherWindow:
         self.audio_path = self.media_bundle.prepare_audio()
         self.window = Gtk.Window(title=config.display_name)
         self.window.set_wmclass("dragon-codex-boot", config.display_name)
-        self.window.set_icon_name("dragon-codex-boot")
+        self.window.set_icon_name("chatgpt")
+        icon = None
+        for icon_path in (
+            Path("/usr/share/pixmaps/chatgpt.png"),
+            Path("/usr/local/share/pixmaps/chatgpt.png"),
+        ):
+            if icon_path.is_file():
+                try:
+                    icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(str(icon_path), 256, 256, True)
+                    break
+                except GLib.Error:
+                    pass
+        if icon is None:
+            try:
+                icon_theme = Gtk.IconTheme.get_default()
+                if icon_theme is not None and icon_theme.has_icon("chatgpt"):
+                    icon = icon_theme.load_icon("chatgpt", 256, 0)
+            except GLib.Error:
+                pass
+        if icon is not None:
+            self.window.set_icon(icon)
+            Gtk.Window.set_default_icon(icon)
         self.window.set_decorated(False)
         self.window.set_keep_above(True)
         self.window.set_skip_taskbar_hint(True)
