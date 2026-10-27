@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Dragon Codex Boot
+Comment=Play the Dragon Codex startup animation, then open ChatGPT
+Exec=@EXEC@
+Icon=@ICON@
+Terminal=false
+Categories=Utility;
+StartupNotify=true
+StartupWMClass=dragon-codex-boot

@@ -1,0 +1,22 @@
+{
+  "DisplayName": "Dragon Codex Boot",
+  "Video": "media/startup.mp4",
+  "AppCommand": "chatgpt",
+  "ActivateCommand": "",
+  "AppProcessNames": [
+    "chatgpt",
+    "ChatGPT",
+    "codex-launcher"
+  ],
+  "HoldAt": 11.3,
+  "TransitionStart": 12.7,
+  "TransitionEnd": 13.65,
+  "MaxWaitSeconds": 60,
+  "Volume": 1.0,
+  "Fullscreen": true,
+  "PlayerWidth": 1280,
+  "PlayerHeight": 720,
+  "SkipFadeSeconds": 0.25,
+  "LaunchTargetAtStart": true,
+  "ActivateTargetAtEnd": true
+}

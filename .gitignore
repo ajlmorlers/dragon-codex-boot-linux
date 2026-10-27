@@ -1,0 +1,10 @@
+venv/
+python-packages/
+__pycache__/
+*.pyc
+config/launcher.json
+media/audio-*.wav
+*.part
+build/
+dist/
+*.log
