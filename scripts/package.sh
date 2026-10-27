@@ -7,6 +7,7 @@ NAME="dragon-codex-boot-linux-$VERSION"
 ARCHIVE="$OUT_DIR/$NAME.tar.gz"
 mkdir -p "$OUT_DIR"
 tar -C "$(dirname -- "$ROOT")" \
+    --exclude='dragon-codex-boot-linux/.git' \
     --exclude='dragon-codex-boot-linux/python-packages' \
     --exclude='dragon-codex-boot-linux/venv' \
     --exclude='dragon-codex-boot-linux/config/launcher.json' \
