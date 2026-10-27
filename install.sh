@@ -9,7 +9,7 @@ INSTALL_DIR=${DRAGON_CODEX_HOME:-"$DATA_HOME/dragon-codex-boot"}
 CONFIG_DIR="$CONFIG_HOME/dragon-codex-boot"
 CONFIG_FILE="$CONFIG_DIR/config.json"
 APPLICATIONS_DIR="$DATA_HOME/applications"
-ICON_DIR="$DATA_HOME/icons/hicolor/scalable/apps"
+LEGACY_ICON="$DATA_HOME/icons/hicolor/scalable/apps/dragon-codex-boot.svg"
 DESKTOP_FILE="$APPLICATIONS_DIR/dragon-codex-boot.desktop"
 WRAPPER="$BIN_DIR/dragon-codex-boot"
 
@@ -41,7 +41,7 @@ fi
 
 mkdir -p "$INSTALL_DIR/dragon_codex_boot" "$INSTALL_DIR/config" "$INSTALL_DIR/media" \
     "$INSTALL_DIR/assets" "$INSTALL_DIR/python-packages" "$CONFIG_DIR" "$BIN_DIR" \
-    "$APPLICATIONS_DIR" "$ICON_DIR"
+    "$APPLICATIONS_DIR"
 
 install -m 644 "$ROOT/dragon_codex_boot/launcher.py" "$INSTALL_DIR/dragon_codex_boot/launcher.py"
 install -m 644 "$ROOT/requirements.txt" "$INSTALL_DIR/requirements.txt"
@@ -75,9 +75,11 @@ python3 -m pip install --disable-pip-version-check --no-input --upgrade \
     "${PIP_INDEX_ARGS[@]}" -r "$INSTALL_DIR/requirements.txt"
 
 ln -sfn "$INSTALL_DIR/run.sh" "$WRAPPER"
-install -m 644 "$ROOT/assets/dragon-codex-boot.svg" "$ICON_DIR/dragon-codex-boot.svg"
+if [ -e "$LEGACY_ICON" ]; then
+    rm -f -- "$LEGACY_ICON"
+fi
 
-sed -e "s|@EXEC@|$WRAPPER|g" -e "s|@ICON@|dragon-codex-boot|g" \
+sed -e "s|@EXEC@|$WRAPPER|g" -e "s|@ICON@|chatgpt|g" \
     "$ROOT/assets/dragon-codex-boot.desktop.in" > "$DESKTOP_FILE"
 chmod 644 "$DESKTOP_FILE"
 
